@@ -35,7 +35,7 @@ Content-Type: application/json
 
 {
   "username": "ali",
-  "password":"root123"
+  "password": "root123"
 }
 
 
@@ -46,4 +46,23 @@ Authorization: Basic YWxpOnJvb3QxMjM=
 
 {
   "password": "passcode"
+}
+
+
+###
+POST http://localhost/auth/signUp
+Content-Type: application/json
+
+{
+  "username": "ketmon@mail",
+  "password": "112345sa_A"
+}
+
+###
+POST http://localhost/auth/sign-in
+Content-Type: application/json
+
+{
+  "username": "ketmons@mail.ru",
+  "password": "112345sa_A"
 }

@@ -30,7 +30,6 @@ public class UserControllerImpl implements UserController{
                 .passwordEncoder(s -> passwordEncoder.encode(userDTO.getPassword()))
                 .roles("USER")
                 .build();
-        securityConfig.userDetailsService().createUser(user);
         return null;
     }
 
@@ -46,9 +45,9 @@ public class UserControllerImpl implements UserController{
 
     @Override
     public ApiResult edit(String username, UserDTO userDTO) {
-        UserDetails userDetails = securityConfig.userDetailsService().loadUserByUsername(username);
-
-        securityConfig.userDetailsService().changePassword(userDetails.getPassword(),userDTO.getPassword());
+//        UserDetails userDetails = securityConfig.userDetailsService().loadUserByUsername(username);
+//
+//        securityConfig.userDetailsService().changePassword(userDetails.getPassword(),userDTO.getPassword());
         return null;
     }
 
