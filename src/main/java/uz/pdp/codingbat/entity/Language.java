@@ -1,9 +1,12 @@
 package uz.pdp.codingbat.entity;
 
 
+import lombok.Getter;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
 public class Language {
 
     @Id

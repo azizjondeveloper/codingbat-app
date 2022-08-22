@@ -23,21 +23,21 @@ public class LanguageControllerImpl implements LanguageController {
 
     @Override
     public List<LanguageDTO> getAll() {
-        return null;
+        return languageService.getAll();
     }
 
     @Override
     public LanguageDTO get(Short id) {
-        return null;
+        return languageService.get(id);
     }
 
     @Override
     public ApiResult edit(Short id, LanguageDTO languageDTO) {
-        return null;
+        return languageService.edit(id,languageDTO);
     }
 
     @Override
     public ApiResult delete(Short id) {
-        return null;
+        return languageService.delete(id);
     }
 }

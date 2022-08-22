@@ -1,0 +1,49 @@
+GET http://localhost/language
+Authorization: Basic dXNlcjprZXRtb24xMjM=
+
+
+###GET
+
+GET http://localhost/language/1
+Authorization: Basic YWxpOnBhc3Njb2Rl
+#Authorization: Basic dXNlcjprZXRtb24xMjM=
+#Authorization: Basic bW9kZXI6a2V0bW9uMTIz
+#Authorization: Basic YWRtaW46a2V0bW9uMTIz
+
+###
+POST http://localhost/language
+Content-Type: application/json
+Authorization: Basic YWxpOnJvb3QxMjM=
+#Authorization: Basic dXNlcjprZXRtb24xMjM=
+#Authorization: Basic bW9kZXI6a2V0bW9uMTIz
+#Authorization: Basic YWRtaW46a2V0bW9uMTIz
+
+{
+  "title": "JAVA"
+}
+
+###
+DELETE http://localhost/language/1
+#Authorization: Basic bW9kZXI6a2V0bW9uMTIz
+#Authorization: Basic dXNlcjprZXRtb24xMjM=
+#Authorization: Basic YWRtaW46a2V0bW9uMTIz
+Authorization: Basic YWxpOnJvb3QxMjM=
+
+###
+POST http://localhost/auth
+Content-Type: application/json
+
+{
+  "username": "ali",
+  "password":"root123"
+}
+
+
+###
+PUT http://localhost/auth/ali
+Content-Type: application/json
+Authorization: Basic YWxpOnJvb3QxMjM=
+
+{
+  "password": "passcode"
+}
