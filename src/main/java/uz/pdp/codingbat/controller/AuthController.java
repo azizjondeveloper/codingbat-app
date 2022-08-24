@@ -1,16 +1,18 @@
 package uz.pdp.codingbat.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import uz.pdp.codingbat.exception.InputDataExistsException;
 import uz.pdp.codingbat.payload.ApiResult;
 import uz.pdp.codingbat.payload.SignDTO;
+import uz.pdp.codingbat.payload.UserDTO;
 import uz.pdp.codingbat.service.AuthService;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Objects;
 
 @RequestMapping("/auth")
 @RestController
@@ -20,8 +22,11 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/sign-up")
-    public ApiResult signUp(@Valid @RequestBody SignDTO signDTO) {
-        return authService.register(signDTO);
+    public HttpEntity<?> signUp(@Valid @RequestBody SignDTO signDTO) {
+        ApiResult result = authService.register(signDTO);
+        return ResponseEntity
+                .status(result.isSuccess() ? 200 : 409)
+                .body(result);
     }
 
     @PostMapping("/sign-in")

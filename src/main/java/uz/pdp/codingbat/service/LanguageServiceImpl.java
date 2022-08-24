@@ -21,7 +21,7 @@ public class LanguageServiceImpl implements LanguageService {
     @Override
     public ApiResult add(AddLanguageDTO addLanguageDTO) {
         //todo yoz logicni
-        return new ApiResult();
+        return new ApiResult(true,"OK okasi");
     }
 
     @Override

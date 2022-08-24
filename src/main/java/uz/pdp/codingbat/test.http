@@ -13,10 +13,7 @@ Authorization: Basic YWxpOnBhc3Njb2Rl
 ###
 POST http://localhost/language
 Content-Type: application/json
-Authorization: Basic YWxpOnJvb3QxMjM=
-#Authorization: Basic dXNlcjprZXRtb24xMjM=
-#Authorization: Basic bW9kZXI6a2V0bW9uMTIz
-#Authorization: Basic YWRtaW46a2V0bW9uMTIz
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrZXRtb25AbWFpbC5ydSIsImlhdCI6MTY2MTM1NzU0NiwiZXhwIjoxNjYxNDQzOTQ2fQ.YX2kGD37q5yUy23GYB9PnVViXGCjq6Awwd4-Qo2KbnR4BqjnRn1jJ_lOHJLBkioUaHeOzG7WEgGKFnHnYQfF6Q
 
 {
   "title": "JAVA"
@@ -50,11 +47,11 @@ Authorization: Basic YWxpOnJvb3QxMjM=
 
 
 ###
-POST http://localhost/auth/signUp
+POST http://localhost/auth/sign-up
 Content-Type: application/json
 
 {
-  "username": "ketmon@mail",
+  "username": "ketmon@mail.ru",
   "password": "112345sa_A"
 }
 
@@ -63,6 +60,6 @@ POST http://localhost/auth/sign-in
 Content-Type: application/json
 
 {
-  "username": "ketmons@mail.ru",
+  "username": "ketmon@mail.ru",
   "password": "112345sa_A"
 }

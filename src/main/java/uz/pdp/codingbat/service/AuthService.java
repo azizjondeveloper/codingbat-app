@@ -1,6 +1,10 @@
 package uz.pdp.codingbat.service;
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,10 +15,18 @@ import uz.pdp.codingbat.payload.ApiResult;
 import uz.pdp.codingbat.payload.SignDTO;
 import uz.pdp.codingbat.repository.UserRepository;
 
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.util.Base64;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
 public class AuthService {
+
+    private static final int TOKEN_EXPIRATION_DURATION = 1000 * 60 * 60 * 24;
+    @Value("${jwt.key}")
+    private String TOKEN_KEY;
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -41,7 +53,6 @@ public class AuthService {
 
     public ApiResult signIn(SignDTO signDTO) {
 
-
         User user = userRepository.findByUsername(signDTO.getUsername())
                 .orElseThrow(() -> new InputDataExistsException("Bunday emaillik user mavjud emas"));
 
@@ -54,6 +65,20 @@ public class AuthService {
         if (!passwordEncoder.matches(signDTO.getPassword(), user.getPassword()))
             throw new InputDataExistsException("Parol yoki login xato");
 
-        return new ApiResult(true, "Oka keyingi darsda sizga token qyataraman");
+        //TODO TOKEN QAYTAR
+
+        String token = generateToken(user.getUsername());
+        return new ApiResult(true, "Oka keyingi darsda sizga token qyataraman", token);
+    }
+
+    private String generateToken(String username) {
+        String token = Jwts
+                .builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION_DURATION))
+                .signWith(SignatureAlgorithm.HS512, TOKEN_KEY)
+                .compact();
+        return token;
     }
 }
