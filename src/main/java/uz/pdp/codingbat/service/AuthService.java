@@ -5,6 +5,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,6 +22,7 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class AuthService {
 
@@ -28,14 +30,12 @@ public class AuthService {
     @Value("${jwt.key}")
     private String TOKEN_KEY;
 
+
     private final UserRepository userRepository;
+    private final MailSenderService mailSenderService;
     private final PasswordEncoder passwordEncoder;
 
-    public AuthService(UserRepository userRepository,
-                       PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+
 
     public ApiResult register(SignDTO signDTO) {
 
@@ -48,6 +48,8 @@ public class AuthService {
                 passwordEncoder.encode(signDTO.getPassword()));
 
         userRepository.save(user);
+
+        mailSenderService.sendMessage("bu ko'd", user.getUsername());
         return new ApiResult(true, "OK");
     }
 
