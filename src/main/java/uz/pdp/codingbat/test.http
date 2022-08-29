@@ -47,12 +47,12 @@ Authorization: Basic YWxpOnJvb3QxMjM=
 
 
 ###
-POST http://localhost/auth/sign-up
+POST http://localhost:8081/auth/sign-up
 Content-Type: application/json
 
 {
-  "username": "ketmon@mail.ru",
-  "password": "112345sa_A"
+  "username": "developabror@gmail.com",
+  "password": "Root_123"
 }
 
 ###

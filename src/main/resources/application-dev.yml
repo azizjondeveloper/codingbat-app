@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8081
   error:
     include-message: always
     include-binding-errors: always
@@ -11,8 +11,20 @@ spring:
     username: postgres
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
-
+mail:
+  host=smtp:
+    gmail:
+      com:
+  port: 587
+  username: procodinguz@gmail.com
+  password: xkbnejslrdhpqzeb
+  properties:
+    mail:
+      smtp:
+        auth=true
+      starttls:
+        enable=true
 jwt:
   key: 3XpdXc*765Pzi!jl8buv7QsBaOl!pUNdtVnCc#kf6ihD5G*^U%
