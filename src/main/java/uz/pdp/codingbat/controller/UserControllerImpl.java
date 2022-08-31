@@ -1,19 +1,11 @@
 package uz.pdp.codingbat.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.bind.annotation.RestController;
-import uz.pdp.codingbat.config.SecurityConfig;
 import uz.pdp.codingbat.payload.ApiResult;
 import uz.pdp.codingbat.payload.UserDTO;
-import uz.pdp.codingbat.repository.UserRepository;
 import uz.pdp.codingbat.service.UserService;
 
-import javax.servlet.FilterChain;
 import java.util.List;
 
 @RequiredArgsConstructor

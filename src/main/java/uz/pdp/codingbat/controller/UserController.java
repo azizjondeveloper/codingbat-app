@@ -1,9 +1,7 @@
 package uz.pdp.codingbat.controller;
 
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.codingbat.payload.AddLanguageDTO;
 import uz.pdp.codingbat.payload.ApiResult;
-import uz.pdp.codingbat.payload.LanguageDTO;
 import uz.pdp.codingbat.payload.UserDTO;
 
 import java.util.List;

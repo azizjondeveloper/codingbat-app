@@ -1,6 +1,5 @@
 package uz.pdp.codingbat.service;
 
-import org.springframework.web.bind.annotation.*;
 import uz.pdp.codingbat.payload.ApiResult;
 import uz.pdp.codingbat.payload.UserDTO;
 

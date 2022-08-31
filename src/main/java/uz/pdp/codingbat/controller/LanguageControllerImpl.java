@@ -2,7 +2,6 @@ package uz.pdp.codingbat.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 import uz.pdp.codingbat.payload.AddLanguageDTO;
 import uz.pdp.codingbat.payload.ApiResult;
 import uz.pdp.codingbat.payload.LanguageDTO;

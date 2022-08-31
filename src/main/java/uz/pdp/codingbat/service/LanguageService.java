@@ -1,6 +1,5 @@
 package uz.pdp.codingbat.service;
 
-import org.springframework.stereotype.Service;
 import uz.pdp.codingbat.payload.AddLanguageDTO;
 import uz.pdp.codingbat.payload.ApiResult;
 import uz.pdp.codingbat.payload.LanguageDTO;
