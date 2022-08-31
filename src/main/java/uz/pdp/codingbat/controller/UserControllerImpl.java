@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import uz.pdp.codingbat.config.SecurityConfig;
 import uz.pdp.codingbat.payload.ApiResult;
 import uz.pdp.codingbat.payload.UserDTO;
+import uz.pdp.codingbat.repository.UserRepository;
+import uz.pdp.codingbat.service.UserService;
 
 import javax.servlet.FilterChain;
 import java.util.List;
@@ -17,20 +19,14 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 public class UserControllerImpl implements UserController{
-    private final SecurityConfig securityConfig;
 
-    private final PasswordEncoder passwordEncoder;
-
+    private final UserService userService;
 
 
     @Override
     public ApiResult add(UserDTO userDTO) {
-        UserDetails user= User
-                .withUsername(userDTO.getUsername())
-                .passwordEncoder(s -> passwordEncoder.encode(userDTO.getPassword()))
-                .roles("USER")
-                .build();
-        return null;
+    return userService.add(userDTO);
+
     }
 
     @Override
@@ -45,6 +41,7 @@ public class UserControllerImpl implements UserController{
 
     @Override
     public ApiResult edit(String username, UserDTO userDTO) {
+
 //        UserDetails userDetails = securityConfig.userDetailsService().loadUserByUsername(username);
 //
 //        securityConfig.userDetailsService().changePassword(userDetails.getPassword(),userDTO.getPassword());

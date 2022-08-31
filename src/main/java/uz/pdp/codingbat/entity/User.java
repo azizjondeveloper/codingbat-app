@@ -1,5 +1,6 @@
 package uz.pdp.codingbat.entity;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,7 +11,7 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "users")
-@Getter
+@Data
 @NoArgsConstructor
 public class User implements UserDetails {
 
@@ -30,7 +31,7 @@ public class User implements UserDetails {
 
     private boolean credentialsNonExpired = true;
 
-    private boolean enabled = true;
+    private boolean enabled = false;
 
     public User(String username, String password) {
         this.username = username;

@@ -3,11 +3,9 @@ package uz.pdp.codingbat.service;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import uz.pdp.codingbat.entity.User;
@@ -16,15 +14,13 @@ import uz.pdp.codingbat.payload.ApiResult;
 import uz.pdp.codingbat.payload.SignDTO;
 import uz.pdp.codingbat.repository.UserRepository;
 
-import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
-import java.util.Base64;
 import java.util.Date;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
 public class AuthService {
+
+    private JavaMailSender javaMailSender;
 
     private static final int TOKEN_EXPIRATION_DURATION = 1000 * 60 * 60 * 24;
     @Value("${jwt.key}")
@@ -32,7 +28,7 @@ public class AuthService {
 
 
     private final UserRepository userRepository;
-    private final MailSenderService mailSenderService;
+//    private final MailSenderService mailSenderService;
     private final PasswordEncoder passwordEncoder;
 
 
@@ -49,7 +45,7 @@ public class AuthService {
 
         userRepository.save(user);
 
-        mailSenderService.sendMessage("bu ko'd", user.getUsername());
+//        mailSenderService.sendMessage("bu ko'd", user.getUsername());
         return new ApiResult(true, "OK");
     }
 
