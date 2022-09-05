@@ -1,10 +1,9 @@
 package uz.pdp.codingbat.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import uz.pdp.codingbat.entity.Language;
-import uz.pdp.codingbat.entity.User;
+import uz.pdp.codingbat.exception.InputDataExistsException;
 import uz.pdp.codingbat.payload.AddLanguageDTO;
 import uz.pdp.codingbat.payload.ApiResult;
 import uz.pdp.codingbat.payload.LanguageDTO;
@@ -21,8 +20,14 @@ public class LanguageServiceImpl implements LanguageService {
 
     @Override
     public ApiResult add(AddLanguageDTO addLanguageDTO) {
-         User currentUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        //todo yoz logicni
+
+        if (languageRepository.existsByTitle(addLanguageDTO.getTitle()))
+            throw new InputDataExistsException("BUnday til mavhjud");
+
+        Language language = new Language(addLanguageDTO.getTitle());
+
+        languageRepository.save(language);
+
         return new ApiResult(true,"OK okasi");
     }
 

@@ -47,7 +47,7 @@ Authorization: Basic YWxpOnJvb3QxMjM=
 
 
 ###
-POST http://localhost:8081/auth/sign-up
+POST http://localhost/api/language
 Content-Type: application/json
 
 {

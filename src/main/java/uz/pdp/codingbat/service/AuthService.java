@@ -4,22 +4,22 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import uz.pdp.codingbat.entity.User;
+import uz.pdp.codingbat.exception.DataNotfoundException;
 import uz.pdp.codingbat.exception.InputDataExistsException;
 import uz.pdp.codingbat.payload.ApiResult;
 import uz.pdp.codingbat.payload.SignDTO;
 import uz.pdp.codingbat.repository.UserRepository;
 
 import java.util.Date;
+import java.util.Optional;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
 public class AuthService {
-
-    private JavaMailSender javaMailSender;
 
     private static final int TOKEN_EXPIRATION_DURATION = 1000 * 60 * 60 * 24;
     @Value("${jwt.key}")
@@ -27,9 +27,9 @@ public class AuthService {
 
 
     private final UserRepository userRepository;
-//    private final MailSenderService mailSenderService;
     private final PasswordEncoder passwordEncoder;
 
+    private final EmailService emailService;
 
 
     public ApiResult register(SignDTO signDTO) {
@@ -42,9 +42,15 @@ public class AuthService {
                 signDTO.getUsername(),
                 passwordEncoder.encode(signDTO.getPassword()));
 
+
+        UUID emailCode = UUID.randomUUID();
+
+        user.setEmailCode(emailCode);
+
         userRepository.save(user);
 
-//        mailSenderService.sendMessage("bu ko'd", user.getUsername());
+       new Thread(() -> emailService.sendEmailVerificationCode(user.getUsername(), emailCode)).start();
+
         return new ApiResult(true, "OK");
     }
 
@@ -77,5 +83,17 @@ public class AuthService {
                 .signWith(SignatureAlgorithm.HS512, TOKEN_KEY)
                 .compact();
         return token;
+    }
+
+    public ApiResult verificationEmail(UUID code) {
+
+        User user = userRepository.findByEmailCode(code)
+                .orElseThrow(() -> new DataNotfoundException("Bunday code mavjud emas"));
+
+        user.setEmailCode(null);
+        user.setEnabled(true);
+        userRepository.save(user);
+
+        return ApiResult.successResponse("Muvaffaqiyatli activ qilindi");
     }
 }
