@@ -7,6 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AppCodingbatApplication {
 
     public static void main(String[] args) {
+
+
+
+
         SpringApplication.run(AppCodingbatApplication.class, args);
     }
 
