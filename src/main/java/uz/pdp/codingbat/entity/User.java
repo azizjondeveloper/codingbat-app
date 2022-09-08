@@ -2,16 +2,21 @@ package uz.pdp.codingbat.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
 @Data
 @NoArgsConstructor
+@DynamicUpdate
+@DynamicInsert
 public class User implements UserDetails {
 
     @Id
@@ -31,6 +36,9 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired = true;
 
     private boolean enabled = false;
+
+    @Column(unique = true)
+    private UUID emailCode;
 
     public User(String username, String password) {
         this.username = username;
