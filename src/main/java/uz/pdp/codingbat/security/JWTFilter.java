@@ -20,7 +20,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JWTFilter extends OncePerRequestFilter {
 
-    @Value("${jwt.key}")
+    @Value("${jwt.access.key}")
     private String TOKEN_KEY;
 
     private final UserRepository userRepository;

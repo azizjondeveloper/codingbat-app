@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface LanguageService {
 
-    ApiResult add(AddLanguageDTO addLanguageDTO);
+    ApiResult<?> add(AddLanguageDTO addLanguageDTO);
 
     List<LanguageDTO> getAll();
 
     LanguageDTO get(Short id);
 
-    ApiResult edit(Short id, LanguageDTO languageDTO);
+    ApiResult<?> edit(Short id, LanguageDTO languageDTO);
 
-    ApiResult delete(Short id);
+    ApiResult<?> delete(Short id);
 }
