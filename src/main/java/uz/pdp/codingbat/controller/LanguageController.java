@@ -7,8 +7,10 @@ import uz.pdp.codingbat.payload.LanguageDTO;
 
 import java.util.List;
 
-@RequestMapping("/language")
+@RequestMapping(LanguageController.LANGUAGE_CONTROLLER_BASE_PATH)
 public interface LanguageController {
+
+    String LANGUAGE_CONTROLLER_BASE_PATH = "/language";
 
     @PostMapping
     ApiResult add(@RequestBody AddLanguageDTO addLanguageDTO);

@@ -21,4 +21,16 @@ public class ApiResult {
         this.success = success;
         this.message = message;
     }
+
+    public ApiResult(boolean success) {
+        this.success = success;
+    }
+
+    public static ApiResult successResponse(){
+        return new ApiResult(true);
+    }
+
+    public static ApiResult successResponse(String message){
+        return new ApiResult(true,message);
+    }
 }

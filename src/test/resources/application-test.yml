@@ -1,31 +1,28 @@
 server:
   port: 80
-  error:
-    include-message: always
-    include-binding-errors: always
 
 spring:
   datasource:
     password: root123
-    url: jdbc:postgresql://localhost:5432/codingbat
+    url: jdbc:postgresql://localhost:5432/codingbat_test
     username: postgres
+
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
-
 
   mail:
     host: smtp.gmail.com
-    password: rszyggeqxjyhkfsy
     port: 587
+    username: abror01042001@gmail.com
+    password: wyuoeprynmpkiehe
     properties:
       mail:
         smtp:
           auth: true
           starttls:
             enable: true
-    username: abror01042001@gmail.com
 
 jwt:
   key: 3XpdXc*765Pzi!jl8buv7QsBaOl!pUNdtVnCc#kf6ihD5G*^U%
