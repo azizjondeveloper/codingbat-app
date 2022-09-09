@@ -1,6 +1,7 @@
 package uz.pdp.codingbat.entity.role;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
@@ -9,12 +10,14 @@ import javax.persistence.Id;
 import java.util.UUID;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Permission {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
     private String name;
+
 
 }
