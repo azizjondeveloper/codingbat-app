@@ -1,65 +1,15 @@
-GET http://localhost/language
-Authorization: Basic dXNlcjprZXRtb24xMjM=
-
-
-###GET
-
-GET http://localhost/language/1
-Authorization: Basic YWxpOnBhc3Njb2Rl
-#Authorization: Basic dXNlcjprZXRtb24xMjM=
-#Authorization: Basic bW9kZXI6a2V0bW9uMTIz
-#Authorization: Basic YWRtaW46a2V0bW9uMTIz
-
-###
-POST http://localhost/language
+POST http://localhost/api/auth/sign-in
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrZXRtb25AbWFpbC5ydSIsImlhdCI6MTY2MTM1NzU0NiwiZXhwIjoxNjYxNDQzOTQ2fQ.YX2kGD37q5yUy23GYB9PnVViXGCjq6Awwd4-Qo2KbnR4BqjnRn1jJ_lOHJLBkioUaHeOzG7WEgGKFnHnYQfF6Q
 
 {
-  "title": "JAVA"
+  "username": "sirojiddinecma@gmail.com",
+  "password": "112345sa_A"
 }
-
 ###
-DELETE http://localhost/language/1
-#Authorization: Basic bW9kZXI6a2V0bW9uMTIz
-#Authorization: Basic dXNlcjprZXRtb24xMjM=
-#Authorization: Basic YWRtaW46a2V0bW9uMTIz
-Authorization: Basic YWxpOnJvb3QxMjM=
-
-###
-POST http://localhost/auth
+POST http://localhost/api/auth/sign-up
 Content-Type: application/json
 
 {
-  "username": "ali",
-  "password": "root123"
-}
-
-
-###
-PUT http://localhost/auth/ali
-Content-Type: application/json
-Authorization: Basic YWxpOnJvb3QxMjM=
-
-{
-  "password": "passcode"
-}
-
-
-###
-POST http://localhost:8081/auth/sign-up
-Content-Type: application/json
-
-{
-  "username": "developabror@gmail.com",
-  "password": "Root_123"
-}
-
-###
-POST http://localhost/auth/sign-in
-Content-Type: application/json
-
-{
-  "username": "ketmon@mail.ru",
+  "username": "sirojiddinecma@gmail.com",
   "password": "112345sa_A"
 }

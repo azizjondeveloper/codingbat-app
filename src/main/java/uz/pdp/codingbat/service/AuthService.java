@@ -2,9 +2,14 @@ package uz.pdp.codingbat.service;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import uz.pdp.codingbat.entity.User;
@@ -12,32 +17,51 @@ import uz.pdp.codingbat.exception.DataNotfoundException;
 import uz.pdp.codingbat.exception.InputDataExistsException;
 import uz.pdp.codingbat.payload.ApiResult;
 import uz.pdp.codingbat.payload.SignDTO;
+import uz.pdp.codingbat.payload.TokenDTO;
 import uz.pdp.codingbat.repository.UserRepository;
 
 import java.util.Date;
 import java.util.UUID;
 
-@RequiredArgsConstructor
 @Service
-public class AuthService {
+public class AuthService implements UserDetailsService {
 
-    private JavaMailSender javaMailSender;
 
-    private static final int TOKEN_EXPIRATION_DURATION = 1000 * 60 * 60 * 24;
-    @Value("${jwt.key}")
-    private String TOKEN_KEY;
+    @Value("${jwt.access.key}")
+    private String accessTokenKey;
+
+    @Value("${jwt.access.expirationTime}")
+    private Long accessTokenExpirationTime;
+
+    @Value("${jwt.refresh.key}")
+    private String refreshTokenKey;
+
+    @Value("${jwt.refresh.expirationTime}")
+    private Long refreshTokenExpirationTime;
 
 
     private final UserRepository userRepository;
-//    private final MailSenderService mailSenderService;
     private final PasswordEncoder passwordEncoder;
-
-
-
+    private final AuthenticationManager authenticationManager;
     private final EmailService emailService;
 
+    public AuthService(UserRepository userRepository,
+                       @Lazy PasswordEncoder passwordEncoder,
+                       @Lazy AuthenticationManager authenticationManager,
+                       EmailService emailService) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
+        this.emailService = emailService;
+    }
 
-    public ApiResult register(SignDTO signDTO) {
+
+    @Override
+    public UserDetails loadUserByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(String.format("Bunday %s topilmadi", username)));
+    }
+
+    public ApiResult<String> register(SignDTO signDTO) {
 
         //BUNDAY EMAIL BORMI?
         if (userRepository.existsByUsername(signDTO.getUsername()))
@@ -56,29 +80,33 @@ public class AuthService {
 
         new Thread(() -> emailService.sendEmailVerificationCode(user.getUsername(), emailCode)).start();
 
-        return new ApiResult(true, "OK");
+        return ApiResult.successResponse("OK");
     }
 
-    public ApiResult signIn(SignDTO signDTO) {
+    public ApiResult<TokenDTO> signIn(SignDTO signDTO) {
 
-        User user = userRepository.findByUsername(signDTO.getUsername())
-                .orElseThrow(() -> new InputDataExistsException("Bunday emaillik user mavjud emas"));
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        signDTO.getUsername(),
+                        signDTO.getPassword()
+                )
+        );
 
-        if (!user.isAccountNonExpired()
-                || !user.isAccountNonLocked()
-                || !user.isCredentialsNonExpired()
-                || !user.isEnabled())
-            throw new InputDataExistsException("Userning 4 ta boolean idan qaysidir false");
+        User user = (User) authentication.getPrincipal();
 
-        if (!passwordEncoder.matches(signDTO.getPassword(), user.getPassword()))
-            throw new InputDataExistsException("Parol yoki login xato");
+        String accessToken = generateToken(user.getUsername(), accessTokenKey, accessTokenExpirationTime);
 
-        //TODO TOKEN QAYTAR
+        String refreshToken = generateToken(user.getUsername(), refreshTokenKey, refreshTokenExpirationTime);
 
-        String token = generateToken(user.getUsername());
-        return new ApiResult(true, "Oka keyingi darsda sizga token qyataraman", token);
+        TokenDTO tokenDTO = TokenDTO.builder()
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .build();
+
+        return ApiResult.successResponse(tokenDTO);
     }
-    public ApiResult verificationEmail(UUID code) {
+
+    public ApiResult<String> verificationEmail(UUID code) {
 
         User user = userRepository.findByEmailCode(code)
                 .orElseThrow(() -> new DataNotfoundException("Bunday code mavjud emas"));
@@ -90,14 +118,15 @@ public class AuthService {
         return ApiResult.successResponse("Muvaffaqiyatli activ qilindi");
     }
 
-    private String generateToken(String username) {
-        String token = Jwts
+    private String generateToken(String username,
+                                 String tokenKey,
+                                 Long expirationTime) {
+        return Jwts
                 .builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION_DURATION))
-                .signWith(SignatureAlgorithm.HS512, TOKEN_KEY)
+                .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
+                .signWith(SignatureAlgorithm.HS512, tokenKey)
                 .compact();
-        return token;
     }
 }

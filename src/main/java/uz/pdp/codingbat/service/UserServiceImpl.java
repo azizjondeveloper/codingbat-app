@@ -3,7 +3,6 @@ package uz.pdp.codingbat.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import uz.pdp.codingbat.config.SecurityConfig;
 import uz.pdp.codingbat.entity.User;
 import uz.pdp.codingbat.payload.ApiResult;
 import uz.pdp.codingbat.payload.UserDTO;
@@ -18,12 +17,11 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    private final SecurityConfig securityConfig;
 
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public ApiResult add(UserDTO userDTO) {
+    public ApiResult<?> add(UserDTO userDTO) {
         User user = new User();
         user.setUsername(userDTO.getUsername());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
@@ -42,12 +40,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ApiResult edit(String username, UserDTO languageDTO) {
+    public ApiResult<?> edit(String username, UserDTO languageDTO) {
         return null;
     }
 
     @Override
-    public ApiResult delete(String username) {
+    public ApiResult<?> delete(String username) {
         return null;
     }
 }

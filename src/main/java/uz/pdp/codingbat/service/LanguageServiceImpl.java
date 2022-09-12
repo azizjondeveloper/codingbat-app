@@ -1,10 +1,8 @@
 package uz.pdp.codingbat.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import uz.pdp.codingbat.entity.Language;
-import uz.pdp.codingbat.entity.User;
 import uz.pdp.codingbat.payload.AddLanguageDTO;
 import uz.pdp.codingbat.payload.ApiResult;
 import uz.pdp.codingbat.payload.LanguageDTO;
@@ -20,10 +18,9 @@ public class LanguageServiceImpl implements LanguageService {
     private LanguageRepository languageRepository;
 
     @Override
-    public ApiResult add(AddLanguageDTO addLanguageDTO) {
-         User currentUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public ApiResult<?> add(AddLanguageDTO addLanguageDTO) {
         //todo yoz logicni
-        return new ApiResult(true,"OK okasi");
+        return ApiResult.successResponse("OK okasi");
     }
 
     @Override
@@ -41,13 +38,13 @@ public class LanguageServiceImpl implements LanguageService {
     }
 
     @Override
-    public ApiResult edit(Short id, LanguageDTO languageDTO) {
-        return new ApiResult();
+    public ApiResult<?> edit(Short id, LanguageDTO languageDTO) {
+        return ApiResult.successResponse();
     }
 
     @Override
-    public ApiResult delete(Short id) {
-        return new ApiResult();
+    public ApiResult<?> delete(Short id) {
+        return ApiResult.successResponse();
     }
 
     private LanguageDTO mapLanguageToLanguageDTO(Language language) {

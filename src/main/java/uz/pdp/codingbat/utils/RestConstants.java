@@ -12,9 +12,8 @@ import java.util.regex.Pattern;
 public interface RestConstants {
 
     String[] OPEN_PAGES = {
-            "/**",
             AuthController.AUTH_CONTROLLER_BASE_PATH + "/**",
-            LanguageController.LANGUAGE_CONTROLLER_BASE_PATH+"/**"
+            LanguageController.LANGUAGE_CONTROLLER_BASE_PATH + "/**"
     };
 
     Pattern NON_LATIN = Pattern.compile("[^\\w-]");
@@ -40,7 +39,7 @@ public interface RestConstants {
     }
 
 
-    static String objectToJSON(Object object){
+    static String objectToJSON(Object object) {
         try {
             return objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {

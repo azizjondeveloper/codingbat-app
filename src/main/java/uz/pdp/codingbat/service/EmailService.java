@@ -39,7 +39,7 @@ public class EmailService {
         // Setting up necessary details
         mailMessage.setFrom(sender);
         mailMessage.setTo(email);
-        mailMessage.setText("http://localhost:8082/auth/sign/in?code="+emailCode);
+        mailMessage.setText("http://localhost/api/auth/verification-email?code="+emailCode);
         mailMessage.setSubject("this mail automatically generated!!!");
         javaMailSender.send(mailMessage);
 

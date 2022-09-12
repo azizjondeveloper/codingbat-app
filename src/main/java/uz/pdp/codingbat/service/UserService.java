@@ -8,7 +8,7 @@ import java.util.List;
 public interface UserService {
 
 
-    ApiResult add( UserDTO userDTO);
+    ApiResult<?> add( UserDTO userDTO);
 
 
     List<UserDTO> getAll();
@@ -17,8 +17,8 @@ public interface UserService {
     UserDTO get( String username);
 
 
-    ApiResult edit( String username,
+    ApiResult<?> edit( String username,
                     UserDTO languageDTO);
 
-    ApiResult delete( String username);
+    ApiResult<?> delete( String username);
 }
