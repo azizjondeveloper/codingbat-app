@@ -3,6 +3,7 @@ package uz.pdp.codingbat.entity;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.userdetails.User;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,5 +1,5 @@
 package uz.pdp.codingbat.entity.role;
 
-public class Role {
-
+public enum Role {
+    ADMIN, USER, MODERATOR
 }
