@@ -1,6 +1,7 @@
 package uz.pdp.codingbat.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "cases")
@@ -18,4 +19,6 @@ public class Case {
 
     @ManyToOne(optional = false)
     private Problem problem;
+
+
 }

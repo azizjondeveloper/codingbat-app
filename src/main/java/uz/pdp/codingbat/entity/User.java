@@ -5,10 +5,10 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import uz.pdp.codingbat.entity.role.Permission;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -22,6 +22,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -37,6 +38,10 @@ public class User implements UserDetails {
 
     private boolean enabled = false;
 
+
+    @ManyToMany
+    List<Permission> permissions;
+
     @Column(unique = true)
     private UUID emailCode;
 
@@ -48,6 +53,6 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         //todo role and permissions
-        return null;
+        return permissions;
     }
 }
