@@ -3,9 +3,11 @@ package uz.pdp.codingbat.entity;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import uz.pdp.codingbat.entity.role.Permission;
+import uz.pdp.codingbat.entity.template.AbcUUIDUserAndTime;
 
 import javax.persistence.*;
 import java.util.*;
@@ -17,11 +19,7 @@ import java.util.*;
 @NoArgsConstructor
 @DynamicUpdate
 @DynamicInsert
-public class User implements UserDetails {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class User extends AbcUUIDUserAndTime implements UserDetails {
 
 
     @Column(nullable = false, unique = true)
@@ -39,7 +37,7 @@ public class User implements UserDetails {
     private boolean enabled = false;
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     List<Permission> permissions;
 
     @Column(unique = true)

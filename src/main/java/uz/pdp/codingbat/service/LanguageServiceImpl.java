@@ -9,6 +9,7 @@ import uz.pdp.codingbat.payload.LanguageDTO;
 import uz.pdp.codingbat.repository.LanguageRepository;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,6 +20,11 @@ public class LanguageServiceImpl implements LanguageService {
 
     @Override
     public ApiResult<?> add(AddLanguageDTO addLanguageDTO) {
+        Language language=new Language();
+        language.setTitle(addLanguageDTO.getTitle());
+        language.setUrl(UUID.randomUUID().toString());
+        languageRepository.save(language);
+
         //todo yoz logicni
         return ApiResult.successResponse("OK okasi");
     }

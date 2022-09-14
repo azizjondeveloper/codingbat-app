@@ -38,8 +38,8 @@ public class SecurityConfig {
 
                                 .antMatchers(RestConstants.OPEN_PAGES)
                                 .permitAll()
-                                .antMatchers("/api/**")
-                                .authenticated()
+                                .antMatchers("/**")
+                                .permitAll()
 
                 )
                 .sessionManagement()
