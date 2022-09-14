@@ -1,5 +1,7 @@
 package uz.pdp.codingbat.entity;
 
+import uz.pdp.codingbat.entity.template.AbcIntAuditingUserAndTime;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,11 +9,8 @@ import javax.persistence.*;
         @UniqueConstraint(columnNames = {"title", "language_id"}),
         @UniqueConstraint(columnNames = {"url", "language_id"})
 })
-public class Section {
+public class Section extends AbcIntAuditingUserAndTime {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Short id;
 
     @Column(nullable = false)
     private String title;

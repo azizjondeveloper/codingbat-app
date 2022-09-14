@@ -1,16 +1,14 @@
 package uz.pdp.codingbat.entity;
 
 import lombok.Getter;
+import uz.pdp.codingbat.entity.template.AbcIntAuditingUserAndTime;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
-public class UserProblem {
+public class UserProblem extends AbcIntAuditingUserAndTime {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
 
     @ManyToOne(optional = false)
     private User user;
