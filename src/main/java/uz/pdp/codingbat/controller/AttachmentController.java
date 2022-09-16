@@ -111,7 +111,7 @@ public class AttachmentController {
 
         response.setContentType(attachment.getContentType());
         response.setContentLength(attachment.getSize().intValue());
-        response.setHeader("Content-disposition","inline; filename=\""+attachment.getName()+"\"");//filename="abror"
+        response.setHeader("Content-disposition","inline; filename=\""+attachment.getName()+"\"");
 
         FileCopyUtils.copy(new FileInputStream("D:\\G8\\"+attachment.getId()+
                 (attachment.getName().substring(attachment.getName().lastIndexOf(".")))),
