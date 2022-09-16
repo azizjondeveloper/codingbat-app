@@ -1,14 +1,19 @@
 package uz.pdp.codingbat.entity;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import uz.pdp.codingbat.entity.template.AbcIntAuditingUserAndTime;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "cases")
-public class Case {
+public class Case  extends AbcIntAuditingUserAndTime {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
 
     @Column(nullable = false, columnDefinition = "text")
     private String args;
@@ -18,4 +23,6 @@ public class Case {
 
     @ManyToOne(optional = false)
     private Problem problem;
+
+
 }

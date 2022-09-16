@@ -2,14 +2,14 @@ POST http://localhost/api/auth/sign-in
 Content-Type: application/json
 
 {
-  "username": "sirojiddinecma@gmail.com",
+  "username": "azizabdualiyev6@gmail.com",
   "password": "112345sa_A"
 }
 ###
-POST http://localhost/api/auth/sign-up
+POST http://localhost:80/api/auth/sign-up
 Content-Type: application/json
 
 {
-  "username": "sirojiddinecma@gmail.com",
+  "username": "azizabdualiyev6@gmail.com",
   "password": "112345sa_A"
 }

@@ -23,10 +23,7 @@ public interface RestConstants {
     ObjectMapper objectMapper = new ObjectMapper();
 
 
-    /**
-     * @param input String
-     * @return
-     */
+
     static String makeUrl(String input) {
         if (Objects.isNull(input))
             throw new IllegalArgumentException("For make url given input must not be null");

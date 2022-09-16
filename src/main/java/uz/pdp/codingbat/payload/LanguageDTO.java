@@ -3,14 +3,16 @@ package uz.pdp.codingbat.payload;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class LanguageDTO {
 
-    private Short id;
+    private Integer id;
 
     private String title;
 
@@ -18,7 +20,7 @@ public class LanguageDTO {
 
     private Short sectionCount;
 
-    public LanguageDTO(Short id, String title, String url) {
+    public LanguageDTO(Integer id, String title, String url) {
         this.id = id;
         this.title = title;
         this.url = url;

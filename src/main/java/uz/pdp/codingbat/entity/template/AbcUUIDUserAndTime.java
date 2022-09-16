@@ -1,31 +1,24 @@
-package uz.pdp.codingbat.entity.role;
+package uz.pdp.codingbat.entity.template;
+
 
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.security.core.GrantedAuthority;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.util.UUID;
 
-@Entity
 @Getter
 @Setter
-public class Permission implements GrantedAuthority {
-
+@MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
+public abstract class AbcUUIDUserAndTime extends AbcUserAuditing{
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
-
-    private String name;
-
-
-    @Override
-    public String getAuthority() {
-        return name;
-    }
-
 }

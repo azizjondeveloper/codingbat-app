@@ -1,10 +1,12 @@
 package uz.pdp.codingbat.payload;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.*;
 
 @Getter
+@Setter
 public class SignDTO {
 
     @NotBlank(message = "Oka email bo'sh bo'lmasinda")

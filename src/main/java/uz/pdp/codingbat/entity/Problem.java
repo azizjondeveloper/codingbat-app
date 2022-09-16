@@ -1,14 +1,18 @@
 package uz.pdp.codingbat.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+import uz.pdp.codingbat.entity.template.AbcIntAuditingUserAndTime;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"title", "section_id"}))
-public class Problem {
+public class Problem extends AbcIntAuditingUserAndTime {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+
 
     @Column(nullable = false)
     private String title;

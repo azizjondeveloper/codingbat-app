@@ -1,6 +1,7 @@
 package uz.pdp.codingbat.service;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.pdp.codingbat.entity.Language;
 import uz.pdp.codingbat.payload.AddLanguageDTO;
@@ -9,16 +10,22 @@ import uz.pdp.codingbat.payload.LanguageDTO;
 import uz.pdp.codingbat.repository.LanguageRepository;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class LanguageServiceImpl implements LanguageService {
 
-    private LanguageRepository languageRepository;
+    private final LanguageRepository languageRepository;
 
     @Override
     public ApiResult<?> add(AddLanguageDTO addLanguageDTO) {
+        Language language=new Language();
+        language.setTitle(addLanguageDTO.getTitle());
+        language.setUrl(UUID.randomUUID().toString());
+        languageRepository.save(language);
+
         //todo yoz logicni
         return ApiResult.successResponse("OK okasi");
     }
