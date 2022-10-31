@@ -19,7 +19,6 @@ public class Permission implements GrantedAuthority {
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
-
     private String name;
 
 

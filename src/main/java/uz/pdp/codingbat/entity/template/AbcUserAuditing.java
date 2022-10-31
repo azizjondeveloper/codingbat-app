@@ -13,7 +13,6 @@ import java.util.UUID;
 @Getter
 @Setter
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
 public abstract class AbcUserAuditing extends AbcTimeStamp{
     @CreatedBy
     private UUID createdBy;

@@ -1,9 +1,13 @@
 package uz.pdp.codingbat.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import uz.pdp.codingbat.entity.template.AbcIntAuditingUserAndTime;
 
 import javax.persistence.*;
 
+@Getter
+@Setter
 @Entity
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = {"title", "language_id"}),

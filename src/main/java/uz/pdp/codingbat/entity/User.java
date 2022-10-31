@@ -1,16 +1,24 @@
 package uz.pdp.codingbat.entity;
 
-import lombok.*;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenericGenerator;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.*;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import uz.pdp.codingbat.entity.role.Permission;
 import uz.pdp.codingbat.entity.template.AbcUUIDUserAndTime;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.persistence.*;
-import java.util.*;
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
@@ -19,13 +27,8 @@ import java.util.*;
 @NoArgsConstructor
 @DynamicUpdate
 @DynamicInsert
-public class User implements UserDetails {
-//extends AbcUUIDUserAndTime
+public class User extends AbcUUIDUserAndTime implements UserDetails {
 
-    @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-    private UUID id;
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -40,6 +43,7 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired = true;
 
     private boolean enabled = false;
+
 
 
     @ManyToMany(fetch = FetchType.EAGER)

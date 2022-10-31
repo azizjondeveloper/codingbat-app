@@ -13,27 +13,31 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-public class AttachmentControllerImpl implements AttachmentController{
+public class AttachmentControllerImpl implements AttachmentController {
 
     private final AttachmentService attachmentService;
 
 
+    @Override
     public ApiResult uploadFileToDB(MultipartHttpServletRequest request) {
        return attachmentService.uploadFileToDB(request);
     }
 
 
+    @Override
     public ResponseEntity<?> loadById(UUID id, HttpServletResponse response) {
         return attachmentService.loadById(id, response);
     }
 
 
 
+    @Override
     public ApiResult uploadFileToFS(MultipartHttpServletRequest request) {
         return attachmentService.uploadFileToFS(request);
     }
 
 
+    @Override
     public void loadByIdFS(@PathVariable UUID id, HttpServletResponse response) {
         attachmentService.loadByIdFS(id, response);
     }

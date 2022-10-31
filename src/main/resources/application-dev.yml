@@ -11,33 +11,22 @@ spring:
     username: postgres
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
 
 
+
   mail:
+    host: smtp.gmail.com
+    password:
+    port: 587
     properties:
       mail:
         smtp:
+          auth: true
           starttls:
-            enable: 'true'
-          auth: 'true'
-    host: smtp.gmail.com
-    username: abdualievdev666@gmail.com
-    password: gyxlcnucndnktbjt
-    port: '587'
-
-#  mail:
-#    host: smtp.gmail.com
-#    password: gyxlcnucndnktbjt
-#    port: 587
-#    properties:
-#      mail:
-#        smtp:
-#          auth: true
-#          starttls:
-#            enable: true
-#    username: abdualievdev666@gmail.com
+            enable: true
+    username:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher

@@ -31,7 +31,6 @@ public class LanguageControllerAPITest {
         ResultActions addLanguageActions = mockMvc
                 .perform(post("/api/language")
                 .contentType(MediaType.APPLICATION_JSON)
-//                .header("Authorization", AuthControllerApiTest.tokenType + " " + AuthControllerApiTest.adminAccessToken)
                 .content(Objects.requireNonNull(RestConstants.objectToJSON(addLanguageDTO))));
 
         addLanguageActions.andExpect(status().isOk());

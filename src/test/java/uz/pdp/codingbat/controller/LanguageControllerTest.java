@@ -20,7 +20,7 @@ public class LanguageControllerTest {
 
     @Test
     public void addSuccessTest(){
-        AddLanguageDTO addLanguageDTO = new AddLanguageDTO("JAVA xonim");
+        AddLanguageDTO addLanguageDTO = new AddLanguageDTO("JAVA");
 
         ApiResult apiResult = languageController.add(addLanguageDTO);
         assertTrue(apiResult.isSuccess());

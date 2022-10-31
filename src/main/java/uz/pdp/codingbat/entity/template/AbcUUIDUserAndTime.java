@@ -15,7 +15,6 @@ import java.util.UUID;
 @Getter
 @Setter
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
 public abstract class AbcUUIDUserAndTime extends AbcUserAuditing{
     @Id
     @GeneratedValue(generator = "uuid2")

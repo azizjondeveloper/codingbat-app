@@ -2,7 +2,6 @@ package uz.pdp.codingbat.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -16,15 +15,12 @@ import java.util.UUID;
 public interface AttachmentController {
 
 
-
     @PostMapping("/upload")
     ApiResult uploadFileToDB(MultipartHttpServletRequest request);
 
 
-
     @GetMapping("/load/{id}")
-    ResponseEntity<?> loadById(@PathVariable UUID id, HttpServletResponse response);
-
+    ResponseEntity<?> loadById(UUID id, HttpServletResponse response);
 
 
     @PostMapping("/upload-fs")
@@ -32,5 +28,5 @@ public interface AttachmentController {
 
 
     @GetMapping("/load-fs/{id}")
-    void loadByIdFS(@PathVariable UUID id, HttpServletResponse response);
+    void loadByIdFS(UUID id, HttpServletResponse response);
 }

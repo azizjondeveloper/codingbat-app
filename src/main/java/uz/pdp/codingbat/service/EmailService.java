@@ -1,5 +1,6 @@
 package uz.pdp.codingbat.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -12,11 +13,12 @@ import java.util.UUID;
 
 @RestController
 @Component
+@RequiredArgsConstructor
 @RequestMapping("/auth/sign")
 public class EmailService {
 
-    @Autowired
-    private JavaMailSender javaMailSender;
+
+    private final JavaMailSender javaMailSender;
 
     @Value("${spring.mail.username}")
     private String sender;
