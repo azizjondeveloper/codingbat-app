@@ -28,7 +28,7 @@ public class CaseServiceImpl implements CaseService{
 
 
     @Override
-    public ApiResult add(AddCaseDTO addCaseDTO) {
+    public ApiResult<?> add(AddCaseDTO addCaseDTO) {
         Case newCase = mapCaseDTOToCase(addCaseDTO, new Case());
         caseRepositary.save(newCase);
         return ApiResult.successResponse();
@@ -53,7 +53,7 @@ public class CaseServiceImpl implements CaseService{
 
 
     @Override
-    public ApiResult edit(Long id, AddCaseDTO addCaseDTO) {
+    public ApiResult<?> edit(Long id, AddCaseDTO addCaseDTO) {
         Case findCase = caseRepositary.findById(id)
                 .orElseThrow(IllegalStateException::new);
 

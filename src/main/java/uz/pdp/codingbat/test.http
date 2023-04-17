@@ -1,8 +1,8 @@
-POST http://localhost/api/auth/sign-in
+POST http://localhost:80/api/auth/sign-in
 Content-Type: application/json
 
 {
-  "username": "azizabdualiyev6@gmail.com",
+  "username": "abdualievdev666@gmail.com",
   "password": "112345sa_A"
 }
 ###
@@ -10,6 +10,6 @@ POST http://localhost:80/api/auth/sign-up
 Content-Type: application/json
 
 {
-  "username": "azizabdualiyev6@gmail.com",
+  "username": "abdualievdev666@gmail.com",
   "password": "112345sa_A"
 }

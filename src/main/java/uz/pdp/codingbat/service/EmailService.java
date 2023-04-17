@@ -18,7 +18,8 @@ import java.util.UUID;
 public class EmailService {
 
 
-    private final JavaMailSender javaMailSender;
+    @Autowired
+    private JavaMailSender javaMailSender;
 
     @Value("${spring.mail.username}")
     private String sender;
@@ -28,7 +29,7 @@ public class EmailService {
         SimpleMailMessage mailMessage
                 = new SimpleMailMessage();
 
-        // Setting up necessary details
+
         mailMessage.setFrom(sender);
         mailMessage.setTo(email);
         mailMessage.setText("http://localhost:80/api/auth/verification-email?code="+emailCode);

@@ -64,7 +64,6 @@ public class AuthServiceImpl implements UserDetailsService, AuthService {
 
         public ApiResult<String> register(SignDTO signDTO) {
 
-        //BUNDAY EMAIL BORMI?
         if (userRepository.existsByUsername(signDTO.getUsername()))
             throw new InputDataExistsException("Bunday email mavjud");
 

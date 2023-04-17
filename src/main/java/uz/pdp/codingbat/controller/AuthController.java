@@ -1,6 +1,5 @@
 package uz.pdp.codingbat.controller;
 
-import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.codingbat.payload.ApiResult;
 import uz.pdp.codingbat.payload.SignDTO;
